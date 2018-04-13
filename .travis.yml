@@ -11,3 +11,5 @@ deploy:
   access_key_id: AKIAIB52DWW2SUJFHB4Q
   secret_access_key: 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
   bucket: nadeploy
+  on:
+    all_branches: true
