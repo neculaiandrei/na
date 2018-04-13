@@ -15,7 +15,7 @@ class Navbar extends Component {
         <div className="navbar-menu">
           <div className="navbar-start">
             <div className="navbar-item is-tab">
-              <Link to="/article">All</Link>
+              <Link to="/links">Links</Link>
             </div>
             <div className="navbar-item is-tab">
               <Link to="/explore">Explore</Link>
