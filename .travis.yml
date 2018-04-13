@@ -5,3 +5,9 @@ install:
   - npm install
 script:
   - npm run build
+
+deploy:
+  provider: s3
+  access_key_id: AKIAIB52DWW2SUJFHB4Q
+  secret_access_key: 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
+  bucket: nadeploy
