@@ -8,7 +8,8 @@ script:
 
 after_success:
   - cp appspec.yml build
-  - zip -r build.zip build/* 
+  - cd build
+  - zip -r ../build.zip * 
   - mkdir -p upload
   - mv build.zip upload
 
