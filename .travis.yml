@@ -7,9 +7,10 @@ script:
   - npm run build
 
 before_deploy:
-  - zip -r build build/* 
+  - mv appspec.yml build
+  - zip -r build.zip build/* 
   - mkdir -p upload
-  - mv build.zip upload/build.zip
+  - mv build.zip upload
 
 deploy:
   - provider: s3
