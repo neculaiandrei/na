@@ -6,15 +6,28 @@ install:
 script:
   - npm run build
 
+before_deploy:
+  - zip -r build *
+  - mkdir -p upload
+  - mv build.zip upload/build.zip
+
 deploy:
-  provider: s3
-  access_key_id: 
-    secure: $AWS_ACCESS_KEY_ID
-  secret_access_key:
-    secure: $AWS_SECRET_ACCESS_KEY
-  bucket: nadeploy
-  region: eu-central-1
-  local_dir: build
-  skip_cleanup: true
-  on:
-    all_branches: true
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY_ID
+    secret_access_key: $AWS_SECRET_ACCESS_KEY
+    bucket: nadeploy
+    region: eu-central-1
+    local_dir: upload
+    skip_cleanup: true
+    on:
+      all_branches: true
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY_ID
+    secret_access_key: $AWS_SECRET_ACCESS_KEY
+    bucket: nadeploy
+    key: build.zip
+    bundle_type: zip
+    application: na
+    deployment_group: na
+    on:
+      all_branches: true
