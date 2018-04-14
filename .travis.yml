@@ -6,8 +6,8 @@ install:
 script:
   - npm run build
 
-before_deploy:
-  - mv appspec.yml build
+after_success:
+  - cp appspec.yml build
   - zip -r build.zip build/* 
   - mkdir -p upload
   - mv build.zip upload
