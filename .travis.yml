@@ -5,3 +5,33 @@ install:
   - npm install
 script:
   - npm run build
+
+after_success:
+  - cp appspec.yml build
+  - cd build
+  - zip -r ../build.zip * 
+  - cd ..
+  - mkdir -p upload
+  - mv build.zip upload
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY_ID
+    secret_access_key: $AWS_SECRET_ACCESS_KEY
+    bucket: nadeploy
+    region: eu-central-1
+    local_dir: upload
+    skip_cleanup: true
+    on:
+      branch: master
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY_ID
+    secret_access_key: $AWS_SECRET_ACCESS_KEY
+    bucket: nadeploy
+    key: build.zip
+    bundle_type: zip
+    application: na
+    deployment_group: na
+    region: eu-central-1
+    on:
+      branch: master
