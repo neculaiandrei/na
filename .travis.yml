@@ -4,10 +4,10 @@ node_js:
 install:
   - npm install
 script:
-  - npm run build build/*
+  - npm run build
 
 before_deploy:
-  - zip -r build *
+  - zip -r build build/* 
   - mkdir -p upload
   - mv build.zip upload/build.zip
 
