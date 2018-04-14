@@ -4,7 +4,7 @@ node_js:
 install:
   - npm install
 script:
-  - npm run build
+  - npm run build build/*
 
 before_deploy:
   - zip -r build *
@@ -29,5 +29,6 @@ deploy:
     bundle_type: zip
     application: na
     deployment_group: na
+    region: eu-central-1
     on:
       all_branches: true
